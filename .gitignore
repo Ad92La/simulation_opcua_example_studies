@@ -1,0 +1,70 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment / secret files
+.env
+.env.*
+secrets.env
+*.secrets
+
+# Logs
+production.log
+*.log
+
+# Python cache/build
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Test / coverage
+.pytest_cache/
+.cache
+htmlcov/
+.coverage
+.coverage.*
+
+# Type checkers
+.mypy_cache/
+.pyre/
+
+# Packaging
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker related
+docker/.env
+docker-compose.override.yml
+docker-compose.*.yml
+# If your docker/services create runtime files, ignore them
+docker/**/data/
+
+# Potential sensitive test data
+docker/opc-plc/init-nodes.json
+
+# SSH / keys
+*.pem
+*.key
+*.crt
+.ssh/
+
+# Misc
+.tox/
+.ropeproject/
+coverage.xml
+coverage/
+

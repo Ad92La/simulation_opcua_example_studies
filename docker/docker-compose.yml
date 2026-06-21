@@ -1,0 +1,22 @@
+# docker/docker-compose.yml
+version: '3.8'
+
+services:
+  opc-plc-server:
+    image: mcr.microsoft.com/iotedge/opc-plc:latest
+    container_name: opc-plc-production
+    restart: unless-stopped
+    ports:
+      - "50000:50000"
+    environment:
+      - PLC_NAME=ProductionLine
+    volumes:
+      - ./opc-plc/init-nodes.json:/app/init-nodes.json:ro
+    command: >
+      --pn=50000
+      --nodesfile=/app/init-nodes.json
+      --unsecuretransport
+      --AutoAccept
+      --StepNodeSampleRate=5000
+    
+    
