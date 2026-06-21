@@ -1,0 +1,201 @@
+@startuml
+!define CLASS_COLOR #F8F9FA
+!define METHOD_COLOR #3498DB
+!define FIELD_COLOR #2C3E50
+
+' ===== STIL =====
+skinparam class {
+  BackgroundColor CLASS_COLOR
+  BorderColor #2C3E50
+  FontColor #2C3E50
+}
+
+skinparam note {
+  BackgroundColor #FFF3CD
+  BorderColor #FFC107
+}
+
+' ===== KLASSEN =====
+
+class ProductionSimulation {
+  - production_line: ProductionLine
+  - opcua_client: ProductionOPCUAClient
+  - llm_analyzer: ProductionLLMAnalyzer
+  - llm_optimizer: LLMOptimizer
+  - running: bool
+  - cycle_times: List[float]
+  + start(): void
+  + _log_status(): void
+  + _log_detailed_state(): void
+  + _log_optimization(result: Dict): void
+  + cleanup(): void
+}
+
+class ProductionLine {
+  - machines: List[Machine]
+  - buffers: List[Buffer]
+  - raw_material: Warehouse
+  - finished_goods: Warehouse
+  - total_produced: int
+  - total_scrap: int
+  - simulation_time: float
+  - cycle_count: int
+  - production_history: List[Dict]
+  + run_cycle(): Dict
+  + get_machine_data(): List[Dict]
+  + get_buffer_data(): List[Dict]
+  + get_kpi_data(): Dict
+  + get_machine_by_name(name: str): Machine
+  + get_buffer_by_name(name: str): Buffer
+}
+
+class Machine {
+  - name: str
+  - cycle_time: float
+  - error_rate: float
+  - status: MachineStatus
+  - metrics: MachineMetrics
+  - current_cycle_remaining: float
+  - energy_consumption: float
+  + update(dt: float): void
+  + can_produce(): bool
+  + start_production(): bool
+  + complete_cycle(): bool
+  + repair(): void
+  + oee_component: Dict
+}
+
+class Buffer {
+  - name: str
+  - capacity: int
+  - products: List[Product]
+  - overflow_count: int
+  - starvation_count: int
+  - total_through: int
+  + add_product(product: Product): bool
+  + remove_product(): Product
+  + fill_level: float
+  + is_empty: bool
+  + is_full: bool
+}
+
+class Warehouse {
+  - name: str
+  - capacity: int
+  - stock: List[Product]
+  + store(products: List[Product]): int
+  + retrieve(quantity: int): List[Product]
+  + stock_level: int
+  + utilization: float
+}
+
+class Product {
+  - id: str
+  - type: str
+  - quality: float
+  - processing_time: float
+}
+
+class ProductionLLMAnalyzer {
+  - client: OpenAI
+  - model: str
+  - analysis_history: List[Dict]
+  - last_analysis_time: datetime
+  - min_analysis_interval: int
+  + should_analyze(time: float): bool
+  + format_production_data(data: Dict): str
+  + analyze(data: Dict): Dict
+  + get_latest_suggestions(): List[Dict]
+  + get_parameter_suggestions(): Dict
+}
+
+class LLMOptimizer {
+  - production_line: ProductionLine
+  - analyzer: ProductionLLMAnalyzer
+  - applied_optimizations: List[Dict]
+  + optimize_cycle(): Dict
+  + _collect_data(): Dict
+  + _apply_suggestions(analysis: Dict): List[Dict]
+  + _adjust_machine(name: str, parameter: str, value: float): bool
+  + _adjust_buffer(name: str, capacity: int): bool
+}
+
+class ProductionOPCUAClient {
+  - server_url: str
+  - client: Client
+  - nodes: NodeMapping
+  - connected: bool
+  + connect(): void
+  + disconnect(): void
+  + update_machine_data(data: List[Dict]): void
+  + update_buffer_data(data: List[Dict]): void
+  + update_warehouse_data(data: Dict): void
+  + update_kpi_data(kpis: Dict): void
+  + update_all(production_line: ProductionLine): void
+}
+
+class NodeMapping {
+  - machine_nodes: Dict
+  - buffer_nodes: Dict
+  - warehouse_nodes: Dict
+  - kpi_nodes: Dict
+}
+
+' ===== ENUMS =====
+
+enum MachineStatus {
+  IDLE
+  RUNNING
+  ERROR
+  MAINTENANCE
+  SETUP
+}
+
+class MachineMetrics {
+  + total_produced: int
+  + total_downtime: float
+  + total_runtime: float
+  + errors_count: int
+  + quality_rate: float
+  + availability: float
+  + performance: float
+}
+
+' ===== BEZIEHUNGEN =====
+
+ProductionSimulation --> ProductionLine
+ProductionSimulation --> ProductionOPCUAClient
+ProductionSimulation --> ProductionLLMAnalyzer
+ProductionSimulation --> LLMOptimizer
+
+ProductionLine "1" --> "4" Machine
+ProductionLine "1" --> "3" Buffer
+ProductionLine "1" --> "2" Warehouse
+
+Machine *-- MachineStatus
+Machine *-- MachineMetrics
+
+Buffer "1" --> "*" Product
+Warehouse "1" --> "*" Product
+
+LLMOptimizer --> ProductionLine
+LLMOptimizer --> ProductionLLMAnalyzer
+
+ProductionOPCUAClient --> NodeMapping
+
+' ===== NOTIZEN =====
+note top of ProductionLine
+  **Zentrale Komponente**
+  Verwaltet den gesamten
+  Materialfluss und die
+  Produktionslogik
+end note
+
+note top of ProductionLLMAnalyzer
+  **LLM-Integration**
+  Ruft OpenAI API auf
+  zur Analyse und
+  Optimierungsvorschlägen
+end note
+
+@enduml

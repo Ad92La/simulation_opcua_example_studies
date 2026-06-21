@@ -1,0 +1,156 @@
+@startuml
+!define MASTER_COLOR #2C3E50
+!define COMPONENT_COLOR #3498DB
+!define INTERFACE_COLOR #2ECC71
+
+' ===== STIL DEFINITIONEN =====
+skinparam component {
+  BackgroundColor COMPONENT_COLOR
+  BorderColor MASTER_COLOR
+  FontColor white
+  FontSize 12
+  FontName Arial
+}
+
+skinparam interface {
+  BackgroundColor INTERFACE_COLOR
+  BorderColor #27AE60
+  FontColor #1A1A1A
+}
+
+skinparam package {
+  BackgroundColor #ECF0F1
+  BorderColor #BDC3C7
+  FontColor MASTER_COLOR
+  FontSize 14
+  FontStyle bold
+}
+
+' ===== SYSTEMGRENZE =====
+rectangle "Produktionssimulationssystem\n(Production Simulation System)" {
+
+  ' ===== HAUPTKOMPONENTEN =====
+
+  component "ProductionSimulation\n(Hauptsteuerung)" as Main
+  note right of Main
+    Hauptschleife der Simulation
+    Steuert Zyklus, Timing
+    und Komponentenkoordination
+  end note
+
+  ' ===== SIMULATIONSKOMPONENTEN =====
+  package "Simulation Core" {
+    component "ProductionLine\n(Produktionslinie)" as ProdLine
+
+    component "Machine\n(Maschine)" as Machine
+    component "Buffer\n(Puffer)" as Buffer
+    component "Warehouse\n(Lager)" as Warehouse
+    component "Product\n(Produkt)" as Product
+
+    note bottom of ProdLine
+      Zentrale Simulationslogik
+      Materialflusssteuerung
+      KPI-Berechnung
+    end note
+  }
+
+  ' ===== LLM-KOMPONENTEN =====
+  package "LLM Integration" {
+    component "ProductionLLMAnalyzer\n(LLM-Analyzer)" as LLMAnalyzer
+    component "LLMOptimizer\n(LLM-Optimierer)" as LLMOptimizer
+
+    component "Prompts\n(Prompt-Engine)" as Prompts
+
+    database "Analysis History\n(Analysehistorie)" as History
+
+    note bottom of LLMAnalyzer
+      Formatiert Produktionsdaten
+      Ruft OpenAI API auf
+      Parst JSON-Antworten
+    end note
+  }
+
+  ' ===== OPC-UA-KOMPONENTEN =====
+  package "OPC-UA Client" {
+    component "ProductionOPCUAClient\n(OPC-UA Client)" as OPCUAClient
+
+    component "NodeMapping\n(Node-Mapping)" as NodeMapping
+
+    note bottom of OPCUAClient
+      Verbindet zu OPC-UA Server
+      Schreibt Daten in Nodes
+      Verwaltet Verbindungsstatus
+    end note
+  }
+
+  ' ===== EXTERNE SYSTEME =====
+  rectangle "Externe Systeme" {
+    component "OpenAI API\n(ChatGPT)" as OpenAIService
+    component "OPC-UA Server\n(Primus OPC)" as OPCUAServer
+    component "Logging System\n(Log-Dateien)" as Logging
+  }
+}
+
+' ===== INTERFACES =====
+interface "ISimulationControl" as ISimCtrl
+interface "IMachineData" as IMachineData
+interface "IBufferData" as IBufferData
+interface "IKPIData" as IKPIData
+interface "ILLMAnalysis" as ILLMAnalysis
+interface "IOPCUAUpdate" as IOPCUAUpdate
+interface "ILogging" as ILogging
+
+' ===== VERBINDUNGEN =====
+
+' Hauptsteuerung -> Produktionslinie
+Main --> ProdLine : "steuert\n(run_cycle)"
+
+' Produktionslinie -> Maschinen/Puffer/Lager
+ProdLine --> Machine : "enthält 4x"
+ProdLine --> Buffer : "enthält 3x"
+ProdLine --> Warehouse : "enthält 2x"
+Machine --> Product : "produziert"
+Buffer --> Product : "speichert"
+
+' Produktionslinie -> LLM
+ProdLine ..> LLMAnalyzer : "sendet Daten"
+LLMAnalyzer --> Prompts : "verwendet"
+LLMAnalyzer --> History : "speichert"
+LLMAnalyzer ..> OpenAIService : "API-Request"
+
+' LLM Optimierer
+LLMAnalyzer <-- LLMOptimizer : "nutzt"
+LLMOptimizer ..> ProdLine : "wendet an"
+
+' OPC-UA Verbindungen
+ProdLine ..> OPCUAClient : "liefert Daten"
+OPCUAClient --> NodeMapping : "verwendet"
+OPCUAClient ..> OPCUAServer : "OPC-UA"
+
+' Logging
+Main --> Logging : "schreibt"
+ProdLine --> Logging : "schreibt"
+LLMAnalyzer --> Logging : "schreibt"
+OPCUAClient --> Logging : "schreibt"
+
+' ===== KOMMUNIKATIONSFLÜSSE =====
+note bottom of Main
+  **Kommunikationsflüsse:**
+  1. Datenfluss: ProdLine → LLM Analyzer
+  2. Optimierung: LLM Optimizer → ProdLine
+  3. OPC-UA: ProdLine → OPC-UA Client → Server
+  4. Steuerung: Main → alle Komponenten
+end note
+
+' ===== LEGENDE =====
+legend right
+  |farbe| Bedeutung |
+  |<#3498DB>    | Systemkomponente |
+  |<#2ECC71>    | Interface |
+  |<#ECF0F1>    | Package/Gruppe |
+  |-->>         | Datenfluss |
+  |..>>         | Abhängigkeit/API |
+  |-->          | Enthält/Verwendet |
+endlegend
+
+@enduml
