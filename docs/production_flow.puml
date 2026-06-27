@@ -1,0 +1,39 @@
+@startuml
+title Produktionslinie - Flow Diagram
+
+actor Operator
+
+node "Raw Material Warehouse" as Raw
+queue "Buffer1" as B1
+node "Machine Fraese1" as M1
+queue "Buffer2" as B2
+node "Machine Drehbank1" as M2
+queue "Buffer3" as B3
+node "Machine Bohrmaschine1" as M3
+node "Machine Schleifmaschine1" as M4
+node "Finished Goods Warehouse" as Finished
+
+Operator --> Raw : liefert Rohmaterial
+Raw --> M1 : Material entnommen
+M1 --> B1 : semi-finished
+B1 --> M2 : liefert
+M2 --> B2 : semi-finished
+B2 --> M3 : liefert
+M3 --> B3 : semi-finished
+B3 --> M4 : liefert
+M4 --> Finished : fertige Teile
+
+note right of M1
+  - cycle_time
+  - error_rate
+  - status
+end note
+
+note left of B1
+  - capacity
+  - fill_level
+  - overflow/starvation
+end note
+
+@enduml
+
