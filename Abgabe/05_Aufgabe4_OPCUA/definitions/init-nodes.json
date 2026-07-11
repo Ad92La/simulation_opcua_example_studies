@@ -1,0 +1,364 @@
+{
+  "Folder": "ProductionLine",
+  "FolderList": [
+    {
+      "Folder": "Boiler3",
+      "NodeList": [
+        {
+          "NodeId": "Boiler3_Temperature_Bottom",
+          "Name": "TemperatureBottom",
+          "DataType": "Double",
+          "ValueRank": -1,
+          "AccessLevel": "CurrentReadOrWrite",
+          "Description": "Bottom temperature of Boiler 3"
+        },
+        {
+          "NodeId": "Boiler3_Temperature_Top",
+          "Name": "TemperatureTop",
+          "DataType": "Double",
+          "ValueRank": -1,
+          "AccessLevel": "CurrentReadOrWrite",
+          "Description": "Top temperature of Boiler 3"
+        },
+        {
+          "NodeId": "Boiler3_Pressure",
+          "Name": "Pressure",
+          "DataType": "Double",
+          "ValueRank": -1,
+          "AccessLevel": "CurrentReadOrWrite",
+          "Description": "Pressure of Boiler 3"
+        },
+        {
+          "NodeId": "Boiler3_HeaterState",
+          "Name": "HeaterState",
+          "DataType": "Boolean",
+          "ValueRank": -1,
+          "AccessLevel": "CurrentReadOrWrite",
+          "Description": "Heater on/off state"
+        }
+      ]
+    }
+  ],
+  "NodeList": [
+    {
+      "NodeId": "ProductionLine_Machines_Fraese1_Status",
+      "Name": "Status",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Status of Fraese1 machine"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Fraese1_Counter",
+      "Name": "Counter",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production counter for Fraese1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Fraese1_CycleTime",
+      "Name": "CycleTime",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Cycle time of Fraese1 in seconds"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Fraese1_ErrorRate",
+      "Name": "ErrorRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Error rate of Fraese1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Fraese1_ProductionRate",
+      "Name": "ProductionRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production rate of Fraese1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Fraese1_EnergyConsumption",
+      "Name": "EnergyConsumption",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Energy consumption of Fraese1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Fraese1_Quality",
+      "Name": "Quality",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Quality of Fraese1 production"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Drehbank1_Status",
+      "Name": "Status",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Status of Drehbank1 machine"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Drehbank1_Counter",
+      "Name": "Counter",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production counter for Drehbank1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Drehbank1_CycleTime",
+      "Name": "CycleTime",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Cycle time of Drehbank1 in seconds"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Drehbank1_ErrorRate",
+      "Name": "ErrorRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Error rate of Drehbank1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Drehbank1_ProductionRate",
+      "Name": "ProductionRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production rate of Drehbank1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Drehbank1_EnergyConsumption",
+      "Name": "EnergyConsumption",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Energy consumption of Drehbank1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Drehbank1_Quality",
+      "Name": "Quality",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Quality of Drehbank1 production"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Bohrmaschine1_Status",
+      "Name": "Status",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Status of Bohrmaschine1 machine"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Bohrmaschine1_Counter",
+      "Name": "Counter",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production counter for Bohrmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Bohrmaschine1_CycleTime",
+      "Name": "CycleTime",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Cycle time of Bohrmaschine1 in seconds"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Bohrmaschine1_ErrorRate",
+      "Name": "ErrorRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Error rate of Bohrmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Bohrmaschine1_ProductionRate",
+      "Name": "ProductionRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production rate of Bohrmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Bohrmaschine1_EnergyConsumption",
+      "Name": "EnergyConsumption",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Energy consumption of Bohrmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Bohrmaschine1_Quality",
+      "Name": "Quality",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Quality of Bohrmaschine1 production"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Schleifmaschine1_Status",
+      "Name": "Status",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Status of Schleifmaschine1 machine"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Schleifmaschine1_Counter",
+      "Name": "Counter",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production counter for Schleifmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Schleifmaschine1_CycleTime",
+      "Name": "CycleTime",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Cycle time of Schleifmaschine1 in seconds"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Schleifmaschine1_ErrorRate",
+      "Name": "ErrorRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Error rate of Schleifmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Schleifmaschine1_ProductionRate",
+      "Name": "ProductionRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production rate of Schleifmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Schleifmaschine1_EnergyConsumption",
+      "Name": "EnergyConsumption",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Energy consumption of Schleifmaschine1"
+    },
+    {
+      "NodeId": "ProductionLine_Machines_Schleifmaschine1_Quality",
+      "Name": "Quality",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Quality of Schleifmaschine1 production"
+    },
+    {
+      "NodeId": "ProductionLine_Buffers_Buffer1_Level",
+      "Name": "Level",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Fill level of Buffer1"
+    },
+    {
+      "NodeId": "ProductionLine_Buffers_Buffer1_Capacity",
+      "Name": "Capacity",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Capacity of Buffer1"
+    },
+    {
+      "NodeId": "ProductionLine_Buffers_Buffer2_Level",
+      "Name": "Level",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Fill level of Buffer2"
+    },
+    {
+      "NodeId": "ProductionLine_Buffers_Buffer2_Capacity",
+      "Name": "Capacity",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Capacity of Buffer2"
+    },
+    {
+      "NodeId": "ProductionLine_Buffers_Buffer3_Level",
+      "Name": "Level",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Fill level of Buffer3"
+    },
+    {
+      "NodeId": "ProductionLine_Buffers_Buffer3_Capacity",
+      "Name": "Capacity",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Capacity of Buffer3"
+    },
+    {
+      "NodeId": "ProductionLine_Warehouses_RawMaterial_Stock",
+      "Name": "Stock",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Raw material stock level"
+    },
+    {
+      "NodeId": "ProductionLine_Warehouses_FinishedGoods_Stock",
+      "Name": "Stock",
+      "DataType": "Int32",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Finished goods stock level"
+    },
+    {
+      "NodeId": "ProductionLine_KPIs_OEE",
+      "Name": "OEE",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Overall Equipment Effectiveness"
+    },
+    {
+      "NodeId": "ProductionLine_KPIs_Throughput",
+      "Name": "Throughput",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production throughput per hour"
+    },
+    {
+      "NodeId": "ProductionLine_KPIs_ScrapRate",
+      "Name": "ScrapRate",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Scrap rate percentage"
+    },
+    {
+      "NodeId": "ProductionLine_KPIs_Utilization",
+      "Name": "Utilization",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Description": "Production line utilization percentage"
+    }
+  ]
+}

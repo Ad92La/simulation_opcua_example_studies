@@ -1,0 +1,41 @@
+{
+  "Folder": "Boiler3",
+  "NodeList": [
+    {
+      "NodeId": "Boiler3_Temperature_Bottom",
+      "Name": "TemperatureBottom",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Value": 20.0,
+      "Description": "Bottom temperature of Boiler 3"
+    },
+    {
+      "NodeId": "Boiler3_Temperature_Top",
+      "Name": "TemperatureTop",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Value": 20.0,
+      "Description": "Top temperature of Boiler 3"
+    },
+    {
+      "NodeId": "Boiler3_Pressure",
+      "Name": "Pressure",
+      "DataType": "Double",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Value": 1.0,
+      "Description": "Pressure of Boiler 3"
+    },
+    {
+      "NodeId": "Boiler3_HeaterState",
+      "Name": "HeaterState",
+      "DataType": "Boolean",
+      "ValueRank": -1,
+      "AccessLevel": "CurrentReadOrWrite",
+      "Value": false,
+      "Description": "Heater on/off state"
+    }
+  ]
+}

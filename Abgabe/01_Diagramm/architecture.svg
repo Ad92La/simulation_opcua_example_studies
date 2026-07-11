@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#37474f"/>
+    </marker>
+    <marker id="arrowOpen" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,4 L0,8" fill="none" stroke="#37474f" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="920" height="620" fill="#ffffff"/>
+  <text x="20" y="28" font-size="20" font-weight="700" fill="#202124">Systemarchitektur – Intelligent Systems &amp; Robotics (Teil 1)</text>
+  <text x="20" y="46" font-size="12" fill="#5f6368">UML-Komponentendiagramm: Komponenten und Abhängigkeiten der vier Aufgaben</text>
+
+  <!-- ===== Group Aufgabe 2 ===== -->
+  <rect x="20" y="66" width="250" height="150" rx="8" fill="#E8F0FE" stroke="#4285F4" stroke-width="1.2"/>
+  <text x="34" y="86" font-weight="700" fill="#1967d2">Aufgabe 2 – Produktionslinie</text>
+  <rect x="38" y="98" width="214" height="102" rx="6" fill="#ffffff" stroke="#8ab4f8"/>
+  <text x="50" y="116" font-style="italic" fill="#5f6368">«component»</text>
+  <text x="50" y="133" font-weight="600">ProductionLineSimulation</text>
+  <text x="50" y="149" fill="#3c4043">main.py (Takt, Stau-Logik)</text>
+  <text x="50" y="167" fill="#3c4043">Machines · Buffers 1–4</text>
+  <text x="50" y="183" fill="#3c4043">Quality-Gate · Warehouses</text>
+
+  <!-- ===== Group Aufgabe 4 ===== -->
+  <rect x="300" y="60" width="600" height="230" rx="8" fill="#E6F4EA" stroke="#34A853" stroke-width="1.2"/>
+  <text x="314" y="80" font-weight="700" fill="#188038">Aufgabe 4 – OPC UA</text>
+
+  <rect x="320" y="92" width="180" height="52" rx="6" fill="#ffffff" stroke="#81c995"/>
+  <text x="332" y="110" font-style="italic" fill="#5f6368">«component»</text>
+  <text x="332" y="128" font-weight="600">OPC UA Client (client.py)</text>
+
+  <rect x="320" y="158" width="180" height="52" rx="6" fill="#ffffff" stroke="#81c995"/>
+  <text x="332" y="176" font-style="italic" fill="#5f6368">«component»</text>
+  <text x="332" y="194" font-weight="600">rw_tool CLI (read/write)</text>
+
+  <rect x="640" y="96" width="230" height="150" rx="6" fill="#ffffff" stroke="#81c995"/>
+  <text x="654" y="114" font-style="italic" fill="#5f6368">«server / Docker»</text>
+  <text x="654" y="132" font-weight="600">opc-plc Server</text>
+  <line x1="654" y1="142" x2="856" y2="142" stroke="#dadce0"/>
+  <text x="654" y="160" fill="#3c4043">Namespace ns=3</text>
+  <text x="654" y="182" fill="#3c4043">▸ ProductionLine Nodes</text>
+  <text x="654" y="204" fill="#3c4043">▸ Boiler3 Nodes</text>
+  <text x="668" y="222" fill="#5f6368" font-size="11">(FolderList in init-nodes.json)</text>
+
+  <!-- ===== Group Aufgabe 3 ===== -->
+  <rect x="20" y="300" width="250" height="170" rx="8" fill="#FEF7E0" stroke="#F9AB00" stroke-width="1.2"/>
+  <text x="34" y="320" font-weight="700" fill="#b06000">Aufgabe 3 – KI-Optimierung</text>
+
+  <rect x="38" y="332" width="214" height="58" rx="6" fill="#ffffff" stroke="#fdd663"/>
+  <text x="50" y="350" font-style="italic" fill="#5f6368">«component»</text>
+  <text x="50" y="368" font-weight="600">LLM Optimizer</text>
+  <text x="50" y="384" fill="#3c4043" font-size="11">analyzer.py · mci_analyzer.py</text>
+
+  <rect x="38" y="404" width="214" height="52" rx="6" fill="#fff8e1" stroke="#fdd663" stroke-dasharray="4 3"/>
+  <text x="50" y="422" font-style="italic" fill="#5f6368">«external»</text>
+  <text x="50" y="440" font-weight="600">MCI / OpenAI LLM API</text>
+
+  <!-- ===== Group Aufgabe 1 ===== -->
+  <rect x="300" y="330" width="600" height="170" rx="8" fill="#FCE8E6" stroke="#EA4335" stroke-width="1.2"/>
+  <text x="314" y="350" font-weight="700" fill="#c5221f">Aufgabe 1 – MQTT QoS (eigenständig)</text>
+
+  <rect x="320" y="362" width="200" height="52" rx="6" fill="#ffffff" stroke="#f28b82"/>
+  <text x="332" y="380" font-style="italic" fill="#5f6368">«component»</text>
+  <text x="332" y="398" font-weight="600">Publisher QoS 0/1/2</text>
+
+  <rect x="680" y="362" width="200" height="52" rx="6" fill="#ffffff" stroke="#f28b82"/>
+  <text x="692" y="380" font-style="italic" fill="#5f6368">«component»</text>
+  <text x="692" y="398" font-weight="600">Subscriber QoS 0/1/2</text>
+
+  <rect x="430" y="440" width="300" height="46" rx="6" fill="#ffffff" stroke="#f28b82"/>
+  <text x="444" y="458" font-style="italic" fill="#5f6368">«broker»</text>
+  <text x="444" y="475" font-weight="600">MQTT Broker (Mosquitto / HiveMQ)</text>
+
+  <!-- ===== Edges ===== -->
+  <!-- sim -> client -->
+  <path d="M252,140 L320,118" fill="none" stroke="#37474f" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="256" y="120" font-size="11" fill="#37474f">Prozessdaten</text>
+
+  <!-- client -> server -->
+  <path d="M500,118 L640,140" fill="none" stroke="#37474f" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="512" y="120" font-size="11" fill="#37474f">write (ns=3)</text>
+
+  <!-- rw_tool -> server -->
+  <path d="M500,184 L640,190" fill="none" stroke="#37474f" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="512" y="205" font-size="11" fill="#37474f">read/write · start/stop · Boiler</text>
+
+  <!-- sim ..> llm (dashed) -->
+  <path d="M150,200 L150,332" fill="none" stroke="#8a6d00" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arrowOpen)"/>
+  <text x="156" y="270" font-size="11" fill="#8a6d00">KPIs / Snapshot</text>
+
+  <!-- llm -> api -->
+  <path d="M120,390 L120,404" fill="none" stroke="#37474f" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="126" y="401" font-size="10" fill="#37474f">POST /api/v1/llm/chat</text>
+  <!-- api -> llm (return dashed) -->
+  <path d="M210,404 L210,390" fill="none" stroke="#37474f" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrowOpen)"/>
+  <text x="150" y="401" font-size="10" fill="#37474f"></text>
+
+  <!-- pub -> broker -->
+  <path d="M430,414 L470,440" fill="none" stroke="#37474f" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="360" y="432" font-size="11" fill="#37474f">publish QoS</text>
+
+  <!-- broker -> sub -->
+  <path d="M700,452 L760,414" fill="none" stroke="#37474f" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="715" y="440" font-size="11" fill="#37474f">deliver QoS</text>
+
+  <!-- legend -->
+  <rect x="20" y="560" width="880" height="46" rx="6" fill="#f8f9fa" stroke="#dadce0"/>
+  <text x="34" y="580" font-size="11" fill="#3c4043">Legende:  durchgezogener Pfeil = direkter Aufruf / Datenfluss</text>
+  <line x1="360" y1="576" x2="392" y2="576" stroke="#37474f" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <text x="398" y="580" font-size="11" fill="#3c4043">gestrichelt = Snapshot / Antwort (nicht automatisch zurückgeführt)</text>
+  <text x="34" y="597" font-size="11" fill="#5f6368">Aufgabe 1 (MQTT) ist eigenständig; Aufgaben 2–4 sind über die Fertigungslinie gekoppelt.</text>
+</svg>

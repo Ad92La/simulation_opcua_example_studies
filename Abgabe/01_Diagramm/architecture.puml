@@ -1,0 +1,47 @@
+@startuml SystemArchitecture
+title Intelligent Systems & Robotics - Systemarchitektur (Teil 1)
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+package "Aufgabe 2: Produktionslinie (Simulation)" {
+  [Production Line\n(main.py)] as SIM
+  [Machines\n(Fraese, Drehbank,\nBohr, Schleif)] as MACH
+  [Buffers 1..3\n(Stau-Logik)] as BUF
+  [Warehouses\n(Eingang, Recycling,\nFertigwaren)] as WH
+  SIM --> MACH
+  SIM --> BUF
+  SIM --> WH
+}
+
+package "Aufgabe 4: OPC UA" {
+  [OPC UA Client\n(client.py)] as OPCCLIENT
+  [Read/Write CLI\n(rw_tool.py)] as RWTOOL
+  node "opc-plc Server\n(Docker)" as OPCSERVER {
+    [ProductionLine Nodes\n(init-nodes.json)] as PLNODES
+    [Boiler 3 Nodes\n(boiler3-nodes.json)] as BOILER
+  }
+  OPCCLIENT --> PLNODES : write
+  RWTOOL --> PLNODES : read/write
+  RWTOOL --> BOILER : read/write
+}
+
+package "Aufgabe 3: KI-Optimierung" {
+  [MCI Optimizer\n(optimize.py)] as LLM
+  cloud "MCI LLM API\n(gpt-4o, o3, ...)" as MCI
+  LLM --> MCI : API-Call (Prozessdaten)
+  MCI --> LLM : Empfehlung (JSON)
+}
+
+package "Aufgabe 1: MQTT QoS (eigenstaendig)" {
+  [Publisher QoS 0/1/2] as PUB
+  [Subscriber QoS 0/1/2] as SUB
+  queue "MQTT Broker\n(Mosquitto/HiveMQ)" as BROKER
+  PUB --> BROKER : publish (QoS 0/1/2)
+  BROKER --> SUB : deliver (QoS 0/1/2)
+}
+
+SIM --> OPCCLIENT : Prozessdaten
+SIM ..> LLM : Prozessdaten-Snapshot
+
+@enduml
