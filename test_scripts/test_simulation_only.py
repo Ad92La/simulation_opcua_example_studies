@@ -1,4 +1,10 @@
 import asyncio
+import os
+import sys
+
+# Make the 'src' package directory importable (packages live under src/).
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
+
 from simulation.production_line import ProductionLine
 
 

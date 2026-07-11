@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import logging
 import os
@@ -96,7 +97,7 @@ load_dotenv()
 
 
 class ProductionSimulation:
-    def __init__(self):
+    def __init__(self, llm_provider: str = "openai"):
         self.production_line = ProductionLine()
         self.opcua_client = ProductionOPCUAClient(
             server_url=os.getenv("OPCUA_SERVER_URL", "opc.tcp://localhost:50000")
@@ -105,20 +106,12 @@ class ProductionSimulation:
         # LLM Integration
         self.llm_analyzer = None
         self.llm_optimizer = None
+        self.llm_provider = llm_provider
 
-        api_key = os.getenv("OPENAI_API_KEY")
-        if api_key:
-            try:
-                self.llm_analyzer = ProductionLLMAnalyzer(
-                    api_key=api_key,
-                    model=os.getenv("LLM_MODEL", "gpt-4-turbo-preview")
-                )
-                self.llm_optimizer = LLMOptimizer(self.production_line, self.llm_analyzer)
-                logger.info("LLM integration enabled")
-            except Exception as e:
-                logger.warning(f"LLM initialization failed: {e}")
+        if llm_provider == "mci":
+            self._init_mci_llm()
         else:
-            logger.warning("No OpenAI API key found. LLM optimization disabled.")
+            self._init_openai_llm()
 
         self.running = False
         self.llm_interval = int(os.getenv("SIMULATION_CYCLES_PER_LLM", 300))
@@ -131,6 +124,52 @@ class ProductionSimulation:
         # Signal Handling
         signal.signal(signal.SIGINT, self._signal_handler)
         signal.signal(signal.SIGTERM, self._signal_handler)
+
+    def _init_openai_llm(self):
+        """Default LLM path: OpenAI (unchanged behavior)."""
+        api_key = os.getenv("OPENAI_API_KEY")
+        if api_key:
+            try:
+                self.llm_analyzer = ProductionLLMAnalyzer(
+                    api_key=api_key,
+                    model=os.getenv("LLM_MODEL", "gpt-4-turbo-preview")
+                )
+                self.llm_optimizer = LLMOptimizer(self.production_line, self.llm_analyzer)
+                logger.info("LLM integration enabled (OpenAI)")
+            except Exception as e:
+                logger.warning(f"LLM initialization failed: {e}")
+        else:
+            logger.warning("No OpenAI API key found. LLM optimization disabled.")
+
+    def _init_mci_llm(self):
+        """MCI LLM path: activated via `--llm mci` (Task 3)."""
+        # Imported lazily so the default OpenAI path is unaffected.
+        from src.llm_integration.mci_analyzer import MCIProductionAnalyzer
+
+        # Accept both our MCI_* names and the CLIENT_ID/CLIENT_SECRET names
+        # used in the MCI example snippet.
+        api_key = os.getenv("MCI_API_KEY") or os.getenv("CLIENT_ID")
+        api_secret = os.getenv("MCI_API_SECRET") or os.getenv("CLIENT_SECRET")
+        if api_key and api_secret:
+            try:
+                # IMPORTANT: use a dedicated MCI_MODEL (default gpt-4o) so the
+                # OpenAI-oriented LLM_MODEL (e.g. gpt-4-turbo-preview) is NOT
+                # sent to MCI, which would reject it with HTTP 400.
+                self.llm_analyzer = MCIProductionAnalyzer(
+                    api_key=api_key,
+                    api_secret=api_secret,
+                    base_url=os.getenv("MCI_BASE_URL"),
+                    model=os.getenv("MCI_MODEL", "gpt-4o"),
+                )
+                self.llm_optimizer = LLMOptimizer(self.production_line, self.llm_analyzer)
+                logger.info("LLM integration enabled (MCI)")
+            except Exception as e:
+                logger.warning(f"MCI LLM initialization failed: {e}")
+        else:
+            logger.warning(
+                "No MCI credentials (MCI_API_KEY/MCI_API_SECRET). "
+                "LLM optimization disabled."
+            )
 
     def _signal_handler(self, sig, frame):
         """Signal-Handler für sauberes Beenden"""
@@ -345,15 +384,31 @@ class ProductionSimulation:
         logger.info("=" * 60)
 
 
-async def main():
+async def main(llm_provider: str = "openai"):
     """Hauptfunktion"""
-    simulation = ProductionSimulation()
+    simulation = ProductionSimulation(llm_provider=llm_provider)
     await simulation.start()
 
 
+def _parse_args():
+    parser = argparse.ArgumentParser(
+        description="Production line simulation with optional LLM optimization."
+    )
+    parser.add_argument(
+        "--llm",
+        choices=["openai", "mci"],
+        default="openai",
+        help="LLM provider for optimization suggestions. "
+             "'openai' (default) uses OPENAI_API_KEY; "
+             "'mci' uses the MCI REST API (MCI_API_KEY/MCI_API_SECRET).",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    args = _parse_args()
     try:
-        asyncio.run(main())
+        asyncio.run(main(args.llm))
     except KeyboardInterrupt:
         logger.info("👋 Simulation stopped by user")
     except Exception as e:

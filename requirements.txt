@@ -1,0 +1,12 @@
+# Python dependencies for this repository.
+# Derived from the imports in src/ (see below).
+#
+# Note: the pure production-line simulation (src/simulation/, Aufgabe 2) uses
+# only the Python standard library and needs NO external packages. The packages
+# below are required to run the full application via `python -m src.main`
+# (OPC UA connection + .env loading + repo-internal LLM analysis).
+
+asyncua>=1.0          # OPC UA client (src/opcua_client/, Aufgabe 4)
+python-dotenv>=1.0    # load configuration from .env (src/main.py)
+openai>=1.30          # LLM analysis via OpenAI (default provider, Aufgabe 3)
+requests>=2.31        # LLM analysis via MCI REST API (--llm mci, Aufgabe 3)

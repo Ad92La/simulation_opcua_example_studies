@@ -1,3 +1,10 @@
+import os
+import sys
+
+# Make the 'src' package directory importable: these test scripts use
+# `from simulation ...`, but the packages live under src/.
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
+
 from simulation.buffers import Buffer, Product
 
 

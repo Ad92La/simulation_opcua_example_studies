@@ -11,6 +11,9 @@ services:
     environment:
       - PLC_NAME=ProductionLine
     volumes:
+      # init-nodes.json contains BOTH the production line nodes and the Boiler 3
+      # nodes (as a FolderList). opc-plc's --nodesfile accepts only ONE file, so
+      # a second --nodesfile would override the first instead of adding to it.
       - ./opc-plc/init-nodes.json:/app/init-nodes.json:ro
     command: >
       --pn=50000

@@ -71,3 +71,12 @@ class NodeMapping:
             "ScrapRate": "ns=3;s=ProductionLine_KPIs_ScrapRate",
             "Utilization": "ns=3;s=ProductionLine_KPIs_Utilization"
         }
+
+        # Task 4A: "Boiler 3" exercise nodes (defined in docker/opc-plc/boiler3-nodes.json).
+        # NodeIds follow the schema Boiler3_<Identifier> and are read- and writable.
+        self.boiler_nodes = {
+            "TemperatureBottom": "ns=3;s=Boiler3_Temperature_Bottom",
+            "TemperatureTop": "ns=3;s=Boiler3_Temperature_Top",
+            "Pressure": "ns=3;s=Boiler3_Pressure",
+            "HeaterState": "ns=3;s=Boiler3_HeaterState",
+        }
