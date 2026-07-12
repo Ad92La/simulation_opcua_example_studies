@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python dependencies for this repository.
 # Derived from the imports in src/ (see below).
 #
@@ -10,3 +11,8 @@ asyncua>=1.0          # OPC UA client (src/opcua_client/, Aufgabe 4)
 python-dotenv>=1.0    # load configuration from .env (src/main.py)
 openai>=1.30          # LLM analysis via OpenAI (default provider, Aufgabe 3)
 requests>=2.31        # LLM analysis via MCI REST API (--llm mci, Aufgabe 3)
+=======
+asyncua==2.0.1
+openai==2.45.0
+python-dotenv==1.2.2
+>>>>>>> d3f20f9b642204fdf058cf34d77eccd874140621

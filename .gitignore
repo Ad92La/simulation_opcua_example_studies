@@ -9,6 +9,7 @@ env/
 .env.*
 secrets.env
 *.secrets
+.env.example
 
 # Logs
 production.log
